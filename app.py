@@ -47,12 +47,11 @@ def post_cupcake():
     
     ''' Don't forget to add 'parent' json category '''
     ''' Post new cupcake function '''
-
     
-    flavor = request.json['cupcake']['flavor']
-    size = request.json['cupcake']['size']
-    rating = request.json['cupcake']['rating']
-    image = request.json['cupcake']['image']
+    flavor = request.json['flavor']
+    size = request.json['size']
+    rating = request.json['rating']
+    image = request.json['image']
     
     new_cupcake = Cupcake(flavor=flavor,
                           size=size,
