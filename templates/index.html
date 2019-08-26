@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Cupcakes</h1>
+    
+    <ul id="cupcake-list">
+    
+    </ul>
+
+    <form>
+        <div class="row">
+          <div class="col-sm">
+            <input type="text" class="form-control" placeholder="Flavor">
+          </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" placeholder="Size">
+          </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" placeholder="Rating">
+          </div>
+          <div class="col-sm">
+            <input type="text" class="form-control" placeholder="Image">
+          </div>
+        </div>
+        <br><input type="submit" class="btn btn-primary" value="Add">
+      </form>
+
+</div>
+
+
+
+{% endblock %}

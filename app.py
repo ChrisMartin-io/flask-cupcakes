@@ -64,3 +64,38 @@ def post_cupcake():
     serialized = serialize(new_cupcake)
 
     return (jsonify(cupcake=serialized), 201)
+
+@app.route('/api/cupcakes/<cupcake_id>', methods=["PATCH"])
+def patch_cupcake(cupcake_id):
+    """ patch cupcake info with data from request body """
+
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+    
+    cupcake.flavor = request.json['flavor']
+    cupcake.size = request.json['size']
+    cupcake.rating = request.json['rating']
+    cupcake.image = request.json['image']
+
+    db.session.add(cupcake)
+    db.session.commit()
+
+    serialized = serialize(cupcake)
+
+    return (jsonify(cupcake=serialized), 200)
+
+@app.route('/api/cupcakes/<cupcake_id>', methods=["DELETE"])
+def delete_cupcake(cupcake_id):
+    """ delete the cupcake """
+
+    deleted_cupcake = Cupcake.query.get_or_404(cupcake_id)
+
+    db.session.delete(deleted_cupcake)
+    db.session.commit()
+
+    return jsonify(message="Deleted")
+
+@app.route('/')
+def index():
+    """ returns index page """
+
+    return render_template('index.html')
