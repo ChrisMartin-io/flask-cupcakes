@@ -36,4 +36,15 @@ $(document).ready(async function () {
       </li>
     `)
   });
+
+  $('#search').on('submit', async function(e) {
+    e.preventDefault();
+
+    let search = $('#search-input').val();
+    let response = await axios.post(`${BASE_URL}/search`, {search})
+    console.log(response)
+  })
+
+
+
 });

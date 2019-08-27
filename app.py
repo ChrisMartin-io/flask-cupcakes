@@ -23,6 +23,11 @@ def serialize(cupcake):
         "image": cupcake.image
     }
 
+def search_serialize(search):
+    return {
+        "term" : search.search
+    }
+
 @app.route('/api/cupcakes')
 def get_cupcakes():
     """ Get data on all cupcakes"""
@@ -36,7 +41,7 @@ def get_cupcakes():
 @app.route('/api/cupcakes/<cupcake_id>')
 def get_cupcake(cupcake_id):
     
-    cupcake = Cupcake.query.get(cupcake_id)
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
     serialized = serialize(cupcake)
     
     return jsonify(cupcake=serialized)
@@ -99,3 +104,12 @@ def index():
     """ returns index page """
 
     return render_template('index.html')
+
+@app.route('/api/cupcakes/search', methods=["POST"])
+def search_cupcake():
+    """ searches for a cupcake """
+
+    search_term = request.json['search']
+    result = Cupcake.query.filter(Cupcake.flavor.like(search_term)).all()
+    serialized = search_serialize(result)
+    return jsonify(serialized)
